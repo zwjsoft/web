@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/jcanvas/dist/jcanvas.js"></script>
+		<title></title>
+	</head>
+	<body>
+	<nav>
+		<button onclick="$myCanvas.clearCanvas()">清空</button>
+		<button onclick="startup()">启动</button>
+		<button onclick="window.clearInterval(interval)">停止</button>
+		<button onclick="test()">test</button>
+		<label>验算：</label><input type="text"  id="express"  />		
+	</nav>
+	<br />
+	<div>
+		<div id="result"></div>
+		<canvas id="myCanvas" width="800" height="400" style="border: solid 1px;">
+		    
+		</canvas>
+	</div>
+	<footer>
+		<label>名称：</label><input type="text"  id="arcname"  onkeyup="this.value=this.value.toUpperCase()"/>
+		<label>半径：</label><input type="number"  id="radius"  /><br />
+		<label>赋值：</label><input type="number"  id="idValue"  />
+		<label>速度：</label><input type="number" value=1 id="speed"  /><br />
+		<label>类型：</label><select id="type" >
+			<option></option>
+			<option value=0>零点</option>
+			<option value=1>定点</option>
+			<option value=2>动点</option>
+			<option value=3>依赖</option>			
+		</select>
+		<label>方向：</label><select id="direction">
+			<option></option>
+			<option value="L">向左</option>
+			<option value="R">向右</option>
+		</select><br />
+		<label>依赖：</label><input type="text" id="relyon"  /><br />
+		<button onclick="acrSet()">确认</button><br />
+		<p>一个单位等于10px，10ms走1px</p>
+	</footer>
+
+	</body>
+</html>
+<script>
+var $myCanvas = $('#myCanvas');
+var $type = $('#type');
+var $speed = $('#speed');
+var $direction = $('#direction');
+var $arcname = $('#arcname');
+var $express= $('#express');
+var $radius= $('#radius');
+var $idValue= $('#idValue');
+var $result= $('#result');
+var $relyon= $('#relyon');
+var curLayer;
+var zerox=0;
+
+var arr=[];
+var sn=0;
+
+$myCanvas.contextmenu(function(ev){
+    ev.preventDefault();
+})
+
+$type.change(function(){
+	if($type.val()==0){
+	$idValue.val(0);
+	$arcname.val("O");
+	$idValue.attr("readonly",true);
+	}else{
+	$idValue.attr("readonly",false);	
+	}
+})
+
+var lineFlag=false;
+
+startPos={
+	X:0,
+	Y:0
+};
+
+endPos={
+	X:0,
+	Y:0
+};
+
+lastPos={
+	X:0,
+	Y:0
+};
+var interval;
+function startup(){
+	var layers=$myCanvas.getLayers();
+	var acrs2=layers.filter(item=>{return (item._method.name=="drawArc") && (item.data.type==2)});
+	var acrs3=layers.filter(item=>{return (item._method.name=="drawArc") && (item.data.type==3)});
+	interval=setInterval(function(){
+		acrs2.forEach(ele=>{
+			//动点移动
+			var d= (ele.data.direction=='L'?-1:1);
+			ele.x=ele.x+d*ele.data.speed;	
+		});
+		acrs3.forEach(ele=>{
+			//依赖设置
+			var relyon=ele.data.relyon;
+			console.log(relyon);
+			var first=relyon.substr(0,1);
+			var second=relyon.substr(relyon.length-1,1);
+			var ns=relyon.split(':');
+			var n1=ns[0].substr(1);
+			var n2=ns[1].substr(0,ns[1].length-1);
+			var f=findLayerByName(first).x;
+			var s=findLayerByName(second).x;
+			if(f<s){
+				ele.x=f+(s-f)*parseFloat(n1)/(parseFloat(n1)+parseFloat(n2));
+			}else{
+				ele.x=s+(f-s)*parseFloat(n1)/(parseFloat(n1)+parseFloat(n2));
+			}
+			
+		});		
+		$myCanvas.drawLayers();
+		$result.html(parse($express.val()));
+	},10)
+
+}
+
+function parse(express){
+	var s=express.replace("+",";").replace("-",";").replace("*",";").replace("/",";").replace("(",";").replace(")",";").replace(" ","");
+	var arr=s.split(";");
+	var express1=express;
+	arr.forEach(item=>{
+		express1=express1.replace(item,cacl(item));
+	})
+	return eval(express1);
+	
+}
+
+function cacl(v){
+	 if(!isNaN(Number(v))){
+	 	return v;
+	 }
+	if(v.length==1){
+		return (findLayerByName(v).x-zerox)/10;
+	}else if(v.length==2){	
+		var a1=v.substr(0,1);
+		var a2=v.substr(1,1);
+		return (Math.abs(findLayerByName(a1).x-findLayerByName(a2).x)/10);
+	}
+}
+
+function test(){
+	var v=$express.val();
+	findLayerByName(v);
+	console.log(findLayerByName(v));
+
+}
+
+function findLayerByName(name){
+	var layer;
+	$myCanvas.getLayers().forEach(item=>{
+		if(item.data.arcname==name) {
+			layer= item;
+		}
+	})
+	return layer;
+}
+
+function caclFromZero(){
+		var layers=$myCanvas .getLayers();
+		var acrs=layers.filter(item=>{return (item._method.name=="drawArc")});
+		acrs.forEach(item=>{
+			item.data.value=(item.x-zerox)/10;
+		})
+}
+
+function acrSet(){
+	console.log(curLayer);
+	//curLayer.name=$arcname.val();
+	curLayer.data.arcname=$arcname.val();
+	curLayer.data.direction=$direction.val();
+	curLayer.data.speed=$speed.val();
+	curLayer.data.type=$type.val();
+	curLayer.data.value=$idValue.val();
+	curLayer.radius=$radius.val();
+	curLayer.groups=[$arcname.val()];
+	curLayer.data.relyon=$relyon.val();
+	console.log("txt"+curLayer.name);
+	txtlayer=findLayerByName("txt"+curLayer.name);
+	txtlayer.text=$arcname.val();
+	if(curLayer.data.type==0) {
+		curLayer.draggable=false;
+		zerox=curLayer.x;
+		caclFromZero();
+	}else{
+		curLayer.x=curLayer.data.value*10+zerox;
+		txtlayer.x=curLayer.data.value*10+zerox;
+	}
+	$myCanvas.drawLayers();
+}
+
+function setCurAcr(layer){
+	curLayer=layer;
+	$arcname.val(curLayer.data.arcname);
+	$direction.val(curLayer.data.direction);
+	$speed.val(curLayer.data.speed);
+	$type.val(curLayer.data.type);
+	$idValue.val(curLayer.data.value);
+	$radius.val(curLayer.radius);
+	$relyon.val(curLayer.data.relyon);
+}
+
+function drawLine(pos1,pos2){
+	$myCanvas.drawLine({
+	  strokeStyle: 'blue',
+	  layer:true,
+	  name:"line1",
+	  draggable: true,
+	  dragstop:function(layer){
+	    console.log(layer.name);
+	  },
+	  strokeWidth: 8,
+	  mousemove:function(layer){
+  		if (Math.abs(layer.eventX-layer.x1)<20 || Math.abs(layer.eventX-layer.x2)<20)  
+  			$myCanvas.css("cursor","col-resize"); 
+  		else
+  			$myCanvas.css("cursor","");
+  			
+  			//console.log(layer);
+  		},
+  		mousedown:function(layer){
+  			if (Math.abs(layer.eventX-layer.x1)<20 || Math.abs(layer.eventX-layer.x2)<20) 
+  			{
+  				layer.draggable=false;
+  				var pos={};
+  				pos.X=layer.eventX;
+  				pos.Y=layer.eventY;
+  				drawArc(startPos,10);
+  			}
+  			},
+  		mouseup:function(layer){
+			if(Math.abs(layer.eventX-layer.x2)<20){
+				layer.x2=layer.x2+(layer.eventX-startPos.X);
+				
+			}
+  			layer.draggable=true;
+  		},
+  		dblclick:function(layer){
+  			var pos={};
+  			pos.X=layer.eventX;
+  			pos.Y=layer.y1-8; 	
+			var acrname;
+			if(sn==0) 	
+			{
+				arcname="O";
+			}
+			 else 
+			 {
+				 arcname=String.fromCharCode(64+sn);
+			 }
+			 sn++;
+			 console.log(sn);
+  			drawArc(pos,10,arcname);
+  		},
+	  x1: pos1.X, y1:pos1.Y,
+	  x2: pos2.X, y2:pos2.Y
+	}); 	
+}
+
+function drawRect(pos,width,height){
+	$myCanvas.drawRect({
+    fillStyle: 'steelblue',
+    strokeStyle: 'blue',
+    strokeWidth: 4,
+    x: pos.X, y: pos.Y,
+    fromCenter: false,
+    width: width,
+    height: height
+});
+
+}
+
+function drawArc(pos,r,arcname){
+	$myCanvas.drawArc({
+	  name:arcname,
+	  strokeStyle: '#c33',
+	  fillStyle: '#c33',
+	  strokeWidth: 4,
+	  data:{
+		arcname:arcname,
+	  	speed:1,
+	  	type:2
+	  },
+	  x: pos.X, y: pos.Y,
+	  radius: r,
+	  start: 0, end: 360,
+	  layer:true,
+	  draggable: true,
+	  restrictDragToAxis: 'x',
+	  dblclick:function(layer){
+		setCurAcr(layer);
+	  }
+	}).drawText({
+	  fillStyle: '#000',
+	  name:"txt"+arcname,
+	  strokeWidth: 2,	  
+	  data:{arcname:"txt"+arcname},
+	  x: pos.X, y: pos.Y+20,
+	  layer:true,
+	  fontSize: 24,
+	  draggable: true,
+	  text: arcname
+	}).drawLayers();
+}
+
+
+
+$myCanvas.mousedown(function(ev){
+	startPos.X=ev.pageX;
+	startPos.Y=ev.pageY;
+	if(ev.button==2) 
+	{
+		ev.preventDefault();
+		lineFlag=true;
+	}
+
+});
+
+
+$myCanvas.mouseup(function(ev){
+	if(ev.button==2&& lineFlag && Math.abs(endPos.X-startPos.X)>20) {
+		drawLine(startPos,endPos);
+		lastPos.startX=endPos.X;
+		lastPos.startY=endPos.Y;
+		lineFlag=false;
+	};
+	
+})
+
+$myCanvas.mousemove(function(ev){
+	endPos.X=ev.pageX;
+	endPos.Y=startPos.Y;
+	//console.log(endPos);
+	//alert(endPos);
+
+});
+
+</script>

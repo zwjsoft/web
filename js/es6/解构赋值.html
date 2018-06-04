@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>解构赋值</title>
+    <script>
+    let [name,sex,age]=['zwj','man',20];
+    console.log(name,sex,age);
+    let [name1,sex1,age1]=['zwj',['man',20]];
+    console.log(name1,sex1,age1);
+    let [name2,[sex2,age2]]=['zwj',['man',20]];
+    console.log(name2,sex2,age2);
+    let {name3,sex3,age3}={name3:'zwj',sex3:'man',age3:20};
+    console.log(name3,sex3,age3);
+
+    let {name4:name5,info:[{sex4,age4}]}={name4:'zwj',info:[{sex4:'man',age4:20}]};
+    console.log(name5,sex4,age4);
+
+    let a=5;
+    let b=10;
+    [a,b]=[b,a];
+    console.log(a,b);//数据交换
+    
+    function show({a="a默认",b="b默认"}={}){
+        console.log(a,b);
+    }
+    show({a:100,b:50});
+    show({a:100});
+    show({});
+    show();//函数默认值
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>generator</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function * gen(){
+            yield "one step";
+            yield "two step";
+            yield "three step";
+            return "generator";
+        }
+        let g1=gen();
+        console.log(g1.next());
+        console.log(g1.next());
+        console.log(g1.next());
+        console.log(g1.next());
+        let g2=gen();
+        for(val of g2){
+            console.log(val);
+        }
+
+        let [a,b,c,d]=gen();
+        console.log(a,b,c,d)
+        console.log(...gen());
+
+
+        function * getGitHubUser(){
+            let name=yield "zwjsoft";
+            yield axios.get(`https://api.github.com/users/${name}`)
+        }
+        let gg=getGitHubUser();
+        let name=gg.next().value;
+        gg.next(name).value.then(res=>{
+            console.log(res);
+        })
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

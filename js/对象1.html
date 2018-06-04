@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function CreatePerson(name,qq){
+            //var obj=new Object();
+            //console.log(this)
+            this.name=name;
+            this.qq=qq;
+            //return obj
+            console.log(this)
+        }
+        CreatePerson.prototype.showName=function(){
+                alert(this.name);
+            }
+        CreatePerson.prototype.showQQ=function(){
+                alert(this.qq);
+            }  
+    var obj=new CreatePerson('zyh','123');         
+    var obj1=new CreatePerson('zwj','456');  
+    obj.showName();
+    obj1.showName();
+    console.log(obj.showName===obj1.showName);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

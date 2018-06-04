@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script>
+    window.onload=function(){
+        oDiv=document.getElementById('div1')
+
+        oDiv.onmousedown=function(ev){
+
+            var box=document.createElement('div')
+            box.className='box'
+            box.style.width=oDiv.offsetWidth-2+'px'
+            box.style.height=oDiv.offsetHeight-2+'px'
+            box.style.left=oDiv.offsetLeft+'px'
+            box.style.top=oDiv.offsetTop+'px'
+            document.body.appendChild(box)
+            var disX=ev.clientX-box.offsetLeft;
+            var disY=ev.clientY-box.offsetTop;
+            document.onmousemove=function(ev1){
+                var x=ev1.clientX-disX
+                var y=ev1.clientY-disY
+                if(x<0) {
+                    x=0
+                }
+                else if(x>=(document.documentElement.clientWidth-box.offsetWidth))
+                {
+                    x=document.documentElement.clientWidth-box.offsetwidth
+                }
+                if(y<0) y=0
+                box.style.left=x+'px'
+                box.style.top=y+'px'
+            }
+            document.onmouseup=function(){
+                document.onmouseup=null
+                document.onmousemove=null
+                oDiv.style.top=box.offsetTop+'px'
+                oDiv.style.left=box.offsetLeft+'px'
+                document.body.removeChild(box)
+            }
+            return false  //阻止默认事件，不选中文字
+        }
+
+
+    }
+    
+    </script>
+    <style>
+    #div1{
+        height: 150px;
+        width:150px;
+        background: red;
+        position: absolute
+    }
+    .box{
+        border: 1px dashed black;
+        position: absolute;
+
+    }
+    </style>
+</head>
+<body>
+
+    <div id='div1'>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Set</title>
+    <script>
+        let setArr=new Set(['a','b','c','a'])
+        console.log(setArr);
+        let setArr1=new Set();
+        console.log(setArr1)
+        setArr1.add('a');
+        setArr1.add('b');
+        setArr1.add('c');
+        console.log(setArr1)
+        setArr1.delete('b');
+        console.log(setArr1)
+        console.log(setArr1.has('b'));
+        for(let item of setArr){
+            console.log(item);
+        }
+
+        let wSet=new WeakSet();
+        wSet.add({a:1,b:2});
+        console.log(wSet);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

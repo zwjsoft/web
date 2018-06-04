@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<script>
+//工厂模式创建类
+	function Car(color,door){
+		var ocar = new Object;
+		ocar.color = color;
+		ocar.doors = door;
+		ocar.showColor = function(){
+		document.write(this.color)
+		};
+		return ocar;
+	}
+	var c1 =new Car("red",4);
+	c1.showColor();
+	
+	
+//构造函数方法
+	function Car1(color,door){
+		this.color = color;
+		this.doors = door;
+		this.showColor = function(){
+			alert(this.color)
+		};
+	}
+	var c2 = new Car1("blue",4);
+	c2.showColor();
+	
+//原型方式
+	function Car3(){
+	}
+	Car3.prototype.color = "red";
+	Car3.prototype.doors = 4;
+	Car3.prototype.showColor = function(){
+	alert(this.color);
+	}
+	var c3 = new Car3();
+	c3.showColor();
+//原型模式对象类参数问题
+	function Car4(){
+	}
+	Car4.prototype.color = "red";
+	Car4.prototype.doors = 4;
+	Car4.prototype.arr = new Array("aa","bb");
+	Car4.prototype.showColor = function(){
+	alert(this.color);
+	}
+	var c4 = new Car4();
+	c4.arr.push("cc");
+	console.log(c4.arr); //output:aa,bb,cc
+	console.log(c4.arr); //output:aa,bb,cc	
+	
+//动态原型方式是使用一个标志来判断是否已经给原型赋予了方法。这样可以保证该方法只创建一次
+	function Car5(color,door){
+		this.color = color;
+		this.doors = door;
+		this.arr = new Array("aa","bb");
+		if(typeof Car._initialized == "undefined"){
+		Car.prototype.showColor = function(){
+		alert(this.color);
+		};
+		Car._initialized = true;
+		}
+	}
+	
+//混合工厂模式
+	function Car(){
+		var ocar = new Object();
+		ocar.color = "red";
+		ocar.doors = 4;
+		ocar.showColor = function(){
+		alert(this.color)
+		};
+		return ocar;
+	}
+</script>
+
+<body>
+
+<body>
+
+</html>

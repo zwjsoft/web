@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6类</title>
+    <script>
+        let aaa="attributeEL";
+        class Person{
+            constructor(name,age){
+                this.name=name;
+                this.age=age;
+            }
+            showName(){
+                console.log(this.name);
+            }
+            showAge(){
+                console.log(this.age);
+            }
+            [aaa](){
+                console.log("属性表达式测试")
+            }
+            set sex(val){
+                console.log(`设置的值是：${val}`)
+            }
+            get sex(){
+                console.log('get的信息')
+            }
+            static getClassName(){
+                return "Person"
+            }
+        }
+    
+        let p1=new Person('zwj',18);
+        p1.showAge();
+        p1.attributeEL()
+        p1.sex='man'
+        p1.sex;
+        console.log(Person.getClassName());
+
+        class Studen extends Person{
+            constructor(name,age,skill){
+                super(name,age);
+                this.skill=skill;
+            }
+        }
+        let student=new Studen("zyh",12,"English");
+        console.log(student.skill);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

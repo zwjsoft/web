@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //var re=new RegExp('a','i');
+        //var re=/a/i;
+        var re=/\d+/g;
+        var s='aaa11Asgags  7788 skdkgjas1';
+        console.log(s.search(re));
+        console.log(s.match(re));
+        console.log(s.replace(re,'0'))
+        var str="北京 sk 上海llss武汉"
+        var re1=/北京|上海/g
+        console.log(str.replace(re1,'*'))
+        console.log(s.match(/[ag]s/g))
+        console.log(s.match(/[0-9]+/g))
+
+        window.onload=function(){
+            oBtb=document.getElementById("btn1");
+            oTxt1=document.getElementById("txt1");
+            oTxt2=document.getElementById("txt2");
+            oBtb.onclick=function(){
+                var re=/<[^<>]+>/g;
+                oTxt2.value=oTxt1.value.replace(re,'')
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id='btn1'>转换</button>
+    <textarea id='txt1' rows=10 cols=40></textarea>
+    <textarea id='txt2' rows=10 cols=40></textarea>
+</body>
+</html>

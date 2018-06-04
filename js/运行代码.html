@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        console.log(window.navigator)
+        window.onload=function(){
+            var btn=document.getElementById('btn');
+            var oTxt=document.getElementById('txt1');
+            btn.onclick=function(){
+                var newWin=window.open('about:black','_blank');
+                newWin.document.write(oTxt.value)
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <textarea id='txt1' rows=10 cols=40>
+
+    </textarea><br>
+    <button id="btn">运行</button>
+</body>
+</html>

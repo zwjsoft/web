@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    window.onload=function(){
+        oUl=document.getElementById('ul1')
+        console.log(oUl.childNodes)
+        console.log(oUl.children)
+        console.log(oUl.firstChild)
+        console.log(oUl.firstElementChild)
+        for(let i=0;i<oUl.childNodes.length;i++){
+            if(oUl.childNodes[i].nodeType==1){
+                oUl.childNodes[i].style.background='red'
+            }
+        }
+        let aBtn=oUl.getElementsByTagName('button')
+        for(let i=0;i<aBtn.length;i++){
+            aBtn[i].onclick=function(){
+                oUl.removeChild(this.parentNode)
+                
+            }
+        }
+        oUl.firstElementChild.style.background='blue'
+        aA=document.getElementsByTagName('a')
+        console.log(aA)
+        for(let i=0;i<aA.length;i++){
+            aA[i].onclick=function(){
+                this.parentNode.style.display='none'
+            }
+        }
+
+
+        otxt=document.getElementById('txt1')
+        obtn=document.getElementById('btn1')
+        obtn2=document.getElementById('btn2')
+        obtn.onclick=function(){
+            //otxt.value='111111'
+            //otxt['value']='22222'
+            otxt.setAttribute('value','333333')
+
+        }
+        obtn2.onclick=function(){
+            let oli=document.createElement('li');
+            oli.innerText='xxxxxxx'
+            oUl.appendChild(oli)
+        }
+    }
+    </script>
+</head>
+<body>
+    <button id='btn2'>增加li</button>
+    <ul id='ul1'>
+        <li>1111111111<a href="javascript:">隐藏</a><button >删除</button></li>
+        <li>2222222222<a href="javascript:">隐藏</a><button >删除</button></li>
+        <li>3333333333<a href="javascript:">隐藏</a><button >删除</button></li>
+        <li>4444444444<a href="javascript:">隐藏</a><button >删除</button></li>
+    </ul>
+
+
+    <input id='txt1' type="text" >
+    <button id='btn1'>赋值</button>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<body>
+
+</body>
+<script >
+//let const作用域
+	(()=>{
+		let a="通过let在函数中赋值";
+		var b="通过var在函数中赋值"
+		if(1==1){
+			let a="通过let在块中赋值";
+			var b="通过var在块中赋值"
+			console.log(`在块中打印let：
+			${a}`);
+			console.log(`在块中打印var：${b}`);
+		}
+		console.log("在函数中打印let："+a);
+		console.log("在函数中打印var："+b);
+	})();
+//模块动态引入
+	import("./es6.js")
+    .then((module) => {
+	  let person=new module.Person(20,'zwj');
+	  person.age=22;
+	  person.getInfo();
+	  let student=new module.Student(20,'zyh');
+	  student.getInfo();
+	  module.getName1();
+    });
+//解构
+	var people1 = {
+	  name: 'bai',
+	  age: 20,
+	  color: ['red', 'blue']
+	};
+	let {name,age}=people1;
+	let [red,blue]=people1.color;
+	console.log(`name:${name}age:${age}${red}${blue}`);
+	
+	
+	
+	function foo(x, y, ...rest) {
+    return ((x + y) * rest.length);
+	console.log(rest);
+	}
+	console.log(foo(1, 2, 'hello', true, 7)); 
+	
+	let num = [1, 3, 5, 7, 9];
+	let [first, second, ...rest] = num;
+	console.log(rest); // [5, 7, 9]
+	
+	function getSomething() {
+    return "something";
+	}
+	async function testAsync() {
+    return "hello async";
+	}
+	async function test() {
+    const v1 = await getSomething();
+    const v2 = await testAsync();
+    console.log(v1, v2);
+	}
+
+	test();
+	console.dir(Promise)
+	
+	
+	
+	function runAsync(){
+		var p = new Promise(function(resolve, reject){
+			//做一些异步操作
+			setTimeout(function(){
+				console.log('执行完成');
+				resolve('随便什么数据');
+			}, 2000);
+		});
+		return p;            
+	}
+	var i=0;
+	runAsync().then(function(data){
+    console.log(`${i}--${data}`);
+	i++;
+    return runAsync();
+    //......
+	}).then(function(data){
+	    console.log(`${i}--${data}`);
+		}
+	);
+	
+</script>
+
+<script type="module">
+	//import * as example  from "./example.js";
+	//example.getName();
+</script>
+
+</html>

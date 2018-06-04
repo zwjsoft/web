@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+<script>
+var strSortResult = _.sortBy('cda');
+console.log(strSortResult);
+
+var arr = [
+  {name: 'aa',age:22},
+  {name: 'bb',age:23}
+];
+
+var arrSortResult = _.sortBy(arr, function(item){
+  return item.name;
+})
+
+_.forEach(arrSortResult, function(item){
+  console.log(item.name);
+});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

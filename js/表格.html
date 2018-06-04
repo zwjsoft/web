@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let oldColor=''
+        window.onload=function(){
+            let oTable1=document.getElementById('tb1')
+            let aTr=oTable1.tBodies[0].rows
+            for(let i=0;i<aTr.length;i++){
+                aTr[i].onmouseover=function(){
+                    oldColor=this.style.background
+                    this.style.background='green'
+                }
+                aTr[i].onmouseout=function(){
+                    aTr[i].style.background=oldColor
+                }
+                if(i%2){
+                aTr[i].style.background='#CCC'
+                }
+            }
+
+            let oName=document.getElementById('name')
+            let oAge=document.getElementById('age')
+            let oBtn1=document.getElementById('btn1')
+            oBtn1.onclick=function(){
+                let oTr=document.createElement('tr')
+                let oTd1=document.createElement('td')
+                oTd1.innerText=oTable1.tBodies[0].rows.length+1
+                let oTd2=document.createElement('td')
+                oTd2.innerText=oName.value
+                let oTd3=document.createElement('td')
+                oTd3.innerText=oAge.value
+                let oTd4=document.createElement('td')
+                oTd4.innerHTML="<a href='javascript:'>删除</a>"
+                oTd4.getElementsByTagName('a')[0].onclick=function(){
+                    oTable1.tBodies[0].removeChild(this.parentNode.parentNode)
+                }
+                oTr.appendChild(oTd1)
+                oTr.appendChild(oTd2)
+                oTr.appendChild(oTd3)
+                oTr.appendChild(oTd4)
+                oTable1.tBodies[0].appendChild(oTr)
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+    姓名：<input id='name' type="text">
+    年龄：<input id='age' type="text">
+    <button id='btn1'>添加</button>
+    <table id='tb1' border="1px" width='500px'>
+        <thead>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>zwj</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>zyh</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>zy</td>
+                <td>16</td>
+            </tr>            
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' type="text/css" href="move.css" />
+    <script src='move.js'></script>
+<script>
+    window.onload=function(){
+        var oPlayImages=document.getElementById('playImages')
+        var oMarkLeft=getElementsByClass(oPlayImages,'mark-left')[0]
+        var oMarkRight=getElementsByClass(oPlayImages,'mark-right')[0]
+        var oBtnPrev=getElementsByClass(oPlayImages,'prev')[0]
+        var oBtnNext=getElementsByClass(oPlayImages,'next')[0]
+        oBtnPrev.onmouseover= oMarkLeft.onmouseover=function(){
+            startMove(oBtnPrev,'opacity',100)
+        }
+        oBtnPrev.onmouseout=oMarkLeft.onmouseout=function(){
+            startMove(oBtnPrev,'opacity',0)
+        }
+        oBtnNext.onmouseover= oMarkRight.onmouseover=function(){
+            startMove(oBtnNext,'opacity',100)
+        }
+        oBtnNext.onmouseout=oMarkRight.onmouseout=function(){
+            startMove(oBtnNext,'opacity',0)
+        }
+
+        var oSmallDiv=getElementsByClass(oPlayImages,'smallImage')[0]
+        aSmallLi=oSmallDiv.getElementsByTagName('li')
+        oSmallUl=oSmallDiv.getElementsByTagName('ul')[0]
+        var oBigDiv=getElementsByClass(oPlayImages,'bigImage')[0]
+        aBigLi=oBigDiv.getElementsByTagName('li')
+        console.log(aBigLi)
+        var nowindex=2
+        var currentindex=0
+        for(var i=0;i<aSmallLi.length;i++){
+            aSmallLi[i].index=i
+            aSmallLi[i].onclick=function(){
+                if(this.index==currentindex) return
+                currentindex=this.index
+                aBigLi[this.index].style.zIndex=nowindex++
+                aBigLi[this.index].style.height=0
+                startMove(aBigLi[this.index],'height',300)
+            }
+        }
+        oSmallUl.style.width=aSmallLi.length*(aSmallLi[0].offsetWidth+2)+'px'
+        function tab(){
+            aBigLi[currentindex].style.zIndex=nowindex++
+            aBigLi[currentindex].style.height=0
+            startMove(aBigLi[currentindex],'height',300)
+            if(currentindex==0){
+                startMove(oSmallUl,'left',0)
+            }else if(currentindex==aSmallLi.length-1){
+                startMove(oSmallUl,'left',-(currentindex-2)*aSmallLi[0].offsetWidth)
+            }else{
+            startMove(oSmallUl,'left',-(currentindex-1)*aSmallLi[0].offsetWidth)
+        }
+        }
+        oBtnPrev.onclick=function(){
+            currentindex--;
+            if(currentindex<0) currentindex=aBigLi.length-1
+            tab()
+        }
+        oBtnNext.onclick=function(){
+            currentindex++;
+            if(currentindex>=aBigLi.length) currentindex=0
+            tab()
+        }
+        var timer=setInterval(oBtnPrev.onclick,2000)
+        oPlayImages.onmouseover=function(){
+            clearInterval(timer)
+        }
+        oPlayImages.onmouseout=function(){
+            timer=setInterval(oBtnPrev.onclick,2000)
+        }
+
+    }
+</script>
+</head>
+<body>
+    <div id='playImages' class='play'> 
+        <ul class='bigImage'>
+            <div class='prev'></div>
+            <div class='next'></div>
+            <a class='mark-left' href='javascript:'></a>
+            <a class='mark-right' href='javascript:'></a>
+            <li style='z-index:1'><img src='images/1.jpg' /></li>
+            <li><img src='images/2.jpg' /></li>
+            <li><img src='images/3.jpg' /></li>
+            <li><img src='images/4.jpg' /></li>
+        </ul>
+        <div class='smallImage'>
+            <ul>
+                <li><img src='images/1.jpg' /></li>
+                <li><img src='images/2.jpg' /></li>
+                <li><img src='images/3.jpg' /></li>
+                <li><img src='images/4.jpg' /></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

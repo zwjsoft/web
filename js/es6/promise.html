@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise</title>
+    <script>
+        let promise=new Promise((resolve,reject)=>{
+            if(1==2){
+                resolve("成功！")
+            }else{
+                reject("失败")
+            }
+        })
+        promise.then(res=>{
+            console.log(res);
+            },err=>{
+                console.log(err)
+            });
+        promise.catch(err=>{
+            console.log(err);
+        })
+        promise.then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err);
+        })
+
+        let promise1=Promise.resolve("aaa");
+        console.log(promise1);
+        promise1.then(res=>{
+            console.log(res);
+        })
+
+        let p1=Promise.resolve("aaa");
+        let p2=Promise.resolve("bbb");
+        let p3=Promise.resolve("ccc");
+        //all只能全部成功才执行
+         Promise.all([p1,p2,p3]).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err)
+        }) 
+        //race
+         Promise.race([p1,p2,p3]).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err)
+        }) 
+
+        let UserLogin=(resolve,reject)=>{
+            setTimeout(()=>{
+                if(1==1){
+                    resolve({msg:"用户登录成功",token:"1298uq32hiqego"})
+                }
+                else{
+                    reject({msg:"用户登录失败",token:""})
+                }
+            },2000);
+        }
+        let GetUserInfo=(resolve,reject)=>{
+            setTimeout(()=>{
+                if(1==1){
+                    resolve({msg:"获取用户信息失败",data:{name:"zwj",age:20},token:"1298uq32hiqego"})
+                }
+                else{
+                    reject({msg:"获取用户信息失败！"})
+                }
+            },2000);
+        }
+
+        new Promise(UserLogin).then(res=>{
+            console.log(res);
+            return new Promise(GetUserInfo);
+        }).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err)
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

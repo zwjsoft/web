@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变量定义</title>
+    <script>
+        var a=12;
+        var a=5;//重复定义
+        console.log(a);//5
+        function show(){
+            //var a;
+            console.log(a);
+            //a=10;
+            var a=10;//预解析效果
+        }
+        show();//undefine
+        for(var i=0;i<10;i++){
+
+        }
+        console.log(i);//10,全局变量被污染
+
+        var arr=[];
+        for(var i=0;i<10;i++){
+            arr[i]={};
+            arr[i].show=function(){
+                console.log(i);
+            }
+        }
+        arr[0].show();//10,i被全局污染
+        arr[5].show();//10,i被全局污染
+
+        //用闭包解决上述问题(function(){})()
+        var arr=[];
+        for(var i=0;i<10;i++){
+            arr[i]={};
+            arr[i].show=function(x){
+                return function(){
+                    console.log(x);
+                }
+            }(i)
+        }
+
+  
+        arr[0].show();//10,i被全局污染
+        arr[5].show();//10,i被全局污染
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

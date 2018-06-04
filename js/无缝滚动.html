@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0
+    }
+    #div1{
+        width: 1200px;
+        height: 168px;
+        margin: 100px auto;
+        position: relative;
+        background: red;
+        overflow: hidden;
+    }
+    #div1 ul{
+        position: absolute;
+        left:0;
+        top:0;
+    }
+    #div1 ul li{
+        float: left;
+        width:300px;
+        list-style: none
+    }
+    
+    </style>
+    <script>
+        let speed=2
+        window.onload=function(){
+            let oDiv1=document.getElementById("div1")
+            let oUl=oDiv1.getElementsByTagName('ul')[0]
+            oUl.innerHTML+=oUl.innerHTML
+            let aLi=oUl.getElementsByTagName('li')
+            oUl.style.width=aLi[0].offsetWidth*aLi.length+'px'
+            function move(){
+                if(oUl.offsetLeft<-oUl.offsetWidth/2){
+                    oUl.style.left='0px'
+                }
+                if(oUl.offsetLeft>0){
+                    oUl.style.left=-oUl.offsetWidth/2+'px'
+                }
+                oUl.style.left=oUl.offsetLeft+speed+'px'
+            }
+            let timer=setInterval(move,30)
+            oDiv1.onmouseover=function(){
+                window.clearInterval(timer)
+            }
+            oDiv1.onmouseout=function(){
+                timer=setInterval(move,30)
+            }            
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="speed=-2"><-</button>
+    <button onclick="speed=+2">-></button>
+    <div id='div1'>
+        <ul>
+            <li><img src='images/1.jpg' width="300px"/></li>
+            <li><img src='images/2.jpg' width="300px"/></li>
+            <li><img src='images/3.jpg' width="300px"/></li>
+            <li><img src='images/4.jpg' width="300px"/></li>
+        </ul>
+
+    </div>
+
+
+</body>
+</html>

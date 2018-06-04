@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #div1{
+        width: 100px;
+        height: 50px;
+        background:red;
+        border:1px solid
+    }
+    </style>
+    <script>
+        //offset的样式是考虑了boder、margin等一系列后的结果值
+    window.onload=function(){
+        oDiv=document.getElementById('div1')
+        setInterval(function(){
+            oDiv.style.width=oDiv.offsetWidth-3+'px'
+        },30)
+    }
+    </script>
+</head>
+<body>
+    <div id='div1'></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>运动</title>
+    <style>
+    div{
+        width:200px;
+        height: 200px;
+        background: red;
+    }
+    </style>
+    <script src="moveClass.js"></script>
+    <script>
+        window.onload=function(){
+            var obj1=document.getElementById("div1");
+            var obj2=document.getElementById("div2");
+            obj1.onmouseover=function(){
+                var moveobj=new moveElement(this);
+                moveobj.move({'width':400}).move({'height':400});
+                
+            }
+            obj2.onmouseover=function(){
+                var moveobj=new moveElement(this);
+                moveobj.move({'width':400,"height":400,"opacity":100});
+                
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="div1">
+
+
+    </div>
+    <div id="div2">
+
+
+    </div>
+</body>
+</html>

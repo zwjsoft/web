@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let str="123";
+        console.log(str.padStart(10,'0'))
+        function show(a,b,...c){
+            console.log(c)
+        }
+        show(1,2,3,4,5,6)
+
+
+        let arr=[1,2,3,4,5];
+        let [a,...arr1]=arr;
+        let arr2=Array.from(arr);
+        console.log(arr,arr1,arr2);
+        console.log(...arr)
+        let str1='12aaa3'
+        let arr3=[...str1]
+        console.log(arr3)
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

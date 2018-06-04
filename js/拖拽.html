@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    window.onload=function(){
+        oDiv=document.getElementById('div1')
+
+        oDiv.onmousedown=function(ev){
+            var disX=ev.clientX-oDiv.offsetLeft;
+            var disY=ev.clientY-oDiv.offsetTop;
+            console.log(disX,disY)
+            document.onmousemove=function(ev1){
+                var x=ev1.clientX-disX
+                var y=ev1.clientY-disY
+                console.log(document.documentElement.clientWidth,oDiv.offsetWidth)
+                if(x<0) {
+                    x=0
+                }
+                else if(x>=(document.documentElement.clientWidth-oDiv.offsetWidth))
+                {
+                    x=document.documentElement.clientWidth-oDiv.offsetwidth
+                }
+                if(y<0) y=0
+                oDiv.style.left=x+'px'
+                oDiv.style.top=y+'px'
+            }
+            document.onmouseup=function(){
+                document.onmouseup=null
+                document.onmousemove=null
+            }
+            return false  //阻止默认事件，不选中文字
+        }
+
+
+    }
+    
+    </script>
+    <style>
+    #div1{
+        height: 150px;
+        width:150px;
+        background: red;
+        position: absolute
+    }
+    </style>
+</head>
+<body>
+    afdasfdlkjl
+    asdfasfdas
+    1111111
+    <div id='div1'>
+        asfdaslafas
+    </div>
+</body>
+</html>

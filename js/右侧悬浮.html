@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #div1{
+        position: absolute;
+        width:100px;
+        height: 100px;
+        background: red;
+        bottom:0px;
+        right:0px
+    }
+    </style>
+    <script>
+        window.onscroll=function(){
+            var oDiv1=document.getElementById('div1')
+            var scrollTop=document.documentElement.scrollTop||document.body.scrollTop
+            move(parseInt((document.documentElement.clientHeight-oDiv1.offsetHeight)/2)+scrollTop)
+        }
+        var timer
+        function move(iTarget){
+            let oDiv1=document.getElementById('div1')
+            clearInterval(timer)//必须的，否则滚动时会产生多个timer造成乱滚
+            timer=setInterval(function(){
+                var speed=(iTarget-oDiv1.offsetTop)/10
+                speed=(speed<0)?Math.floor(speed):Math.ceil(speed)
+                if(iTarget==oDiv1.offsetTop){
+                    clearInterval(timer)
+                }else{
+                    oDiv1.style.top=oDiv1.offsetTop+speed+'px'
+                }
+                console.log(iTarget,oDiv1.offsetTop,speed)
+            },30)
+        }
+    </script>
+</head>
+<body style="height:2000px">
+    <div id='div1'>
+
+    </div>
+</body>
+</html>

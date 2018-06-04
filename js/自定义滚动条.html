@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    window.onload=function(){
+        oDiv1=document.getElementById('div1')
+        oDiv2=document.getElementById('div2')
+        oDiv3=document.getElementById('div3')
+        oDiv4=document.getElementById('div4')
+        var scale=1/(oDiv1.offsetWidth-oDiv2.offsetWidth)
+        oDiv2.onmousedown=function(ev){
+            var disX=ev.clientX-oDiv2.offsetLeft;
+            document.onmousemove=function(ev1){
+                var x=ev1.clientX-disX
+
+                if(x<0) {
+                    x=0
+                }
+                else if(x>=(oDiv1.offsetWidth-oDiv2.offsetWidth))
+                {
+                    x=oDiv1.offsetWidth-oDiv2.offsetwidth
+                }
+                oDiv2.style.left=x+'px'
+                console.log(-scale*oDiv2.offsetLeft*oDiv4.offsetHeight)
+                oDiv4.style.top=-scale*oDiv2.offsetLeft*(oDiv4.offsetHeight-oDiv3.offsetHeight)+'px'
+
+            }
+            document.onmouseup=function(){
+                document.onmouseup=null
+                document.onmousemove=null
+            }
+            return false  //阻止默认事件，不选中文字
+        }
+
+
+    }
+    
+    </script>
+    <style>
+    #div1{
+        height: 20px;
+        width:300px;
+        background:black;
+        position: absolute;
+        margin:50px;
+        padding: 0px
+    }
+    #div2{
+        height: 20px;
+        width:20px;
+        background: red;
+        position: absolute;
+        margin: 0
+    }
+    #div3{
+        width:400px;
+        height: 300px;
+        border:1px solid black;
+        position: relative;
+        overflow: hidden;
+        top:150px
+    }
+    #div4{
+        position: absolute;
+        left:0;
+        top:0px
+    }
+    </style>
+</head>
+<body>
+<div id='div1'>
+    <div id='div2'></div>
+</div>
+<div id='div3'>
+    <div id='div4'>
+
+            DIV+CSS虚线边框|CSS虚线下划线及虚线列表教程 - DIVCSS5
+            2011年2月16日 - DIV+CSS虚线边框|CSS虚线下划线及虚线列表教程 DIV CSS虚线教程篇包括讲解常常出现的各种样式的DIV虚线案例CSS教程。 本节为大家介绍常见的CSS 虚线及...
+            www.divcss5.com/shili/...  - 百度快照
+            html 边框虚线-html虚线边框设置 - DIVCSS5
+            2013年10月17日 - html 边框虚线实现通过CSS实现不同对象虚线边框样式 在HTML可以对大部分标签加边框或虚线边框,接下来DIVCSS5会对几个不同标签加虚线边框效果样式,大家...
+            www.divcss5.com/html/h...  - 百度快照
+            如何给div加一个边框border样式 - DIVCSS5
+            2013年5月24日 - 如何给div加一个边框样式? 对div盒子加一个边框样式很简单只需要使用border板块样式即可。 一、虚线与实线边框 - TOP 边框虚线样式:dashed 边框实现样...
+            www.divcss5.com/wenji/...  - 百度快照
+            点击查看更多边框样式属性>>
+            dotted 定义点状边框。在大多数浏览器中呈现为实线。 dashed 定义虚线。在大多数浏览器中呈现为实线。 solid 定义实线。 double 定义双线。双线的宽度等于 border-wi...
+            www.w3school.com.cn/cs...  - 百度快照
+            CSS 实现虚线 边框 有点组成的边框 - CSDN博客
+            2012年3月7日 - 这个就是显示虚线框的代码solid 边框由实线组成、dotted 边框由点组成、dash...水平虚线的代码: <td height="1"><div style="border-top:1px dashed #...
+            https://blog.csdn.net/dyp330/a...  - 百度快照
+            实现兼容性的CSS粗虚线边框(dashed)效果 « 张鑫旭-鑫空间-鑫生活
+            
+            3.6,Chrome2,Safari4,Opera10浏览器下,我们要使用图片模拟IE下的虚线边框效果。...<div class="border_dashed"></div> 则结果如下图所示:其他浏览器,如Chrome...
+            www.zhangxinxu.com/wor...  - 百度快照
+            css里border的虚线怎么设置_百度知道
+            3个回答 - 最新回答: 2017年02月04日 - 1人觉得有用
+            
+            最佳答案: border:1px dashed #000; 或 border-style:dashed;
+            更多关于div 虚线边框的问题>>
+            https://zhidao.baidu.com/quest...  - 百度快照
+            如何让div显示边框border样式 - DIVCSS5
+    </div>
+</div>
+</body>
+</html>

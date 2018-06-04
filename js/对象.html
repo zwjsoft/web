@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    
+    function CreatePerson(name,age){
+      var obj=new Object()
+      obj.name=name;
+      obj.age=age;
+      obj.showName=function(){
+        alert(obj.name);
+      }
+      obj.showAge=function(){
+        alert(obj.age)
+      }
+      return obj
+    }
+  var obj1=new CreatePerson('zwj','20')
+  var obj2=new CreatePerson('zyh',10)
+  alert(obj1.showName==obj2.showName)
+
+
+    //以上方法等同于如下
+    function CreatePerson1(name,age){
+      //var obj=new Object() 系统自动创建 var this=new Object()
+      this.name=name;
+      this.age=age;
+      this.showName=function(){
+        alert(this.name);
+        (function(){
+        alert('1111:'+this.name)
+        })();
+      }
+      this.showAge=function(){
+        alert(this.age)
+      }
+
+      //return obj 系统自动return this
+    }
+    //用了this后必须new，否则无法执行this的方法
+  var obj3=new CreatePerson1('zwj','20')
+  var obj4=new CreatePerson1('zyh',10)
+  obj3.showName()
+  alert(obj3.showName==obj4.showName)
+
+var arr1=new Array(1,2,3,4,5)
+var arr2=new Array(1,2)
+//直接在某个对象上增加方法，其他对象不生效，类似CSS中style
+arr1.sum=function(){
+  var r=0
+  for(i=0;i<arr1.length;i++){
+    r+=arr1[i]
+  }
+  return r
+}
+//直接在原型类上增加方法，所有对象生效，类似CSS中的Class
+Array.prototype.sum=function(){
+  var r=0
+  for(i=0;i<this.length;i++){
+    r+=this[i]
+  }
+  return r
+}
+
+alert(arr1.sum())
+alert(arr2.sum())
+
+//用原型，解决方法重复问题
+
+    function CreatePerson2(name,age){
+      this.name=name;
+      this.age=age;
+    }
+    CreatePerson2.prototype.showName=function(){
+        alert(this.name);
+      }
+    CreatePerson2.prototype.showAge=function(){
+        alert(this.age)
+      } 
+  //用了原型必须new，否则不能执行方法  
+  var obj5=new CreatePerson2('zwj','20')
+  var obj6=new CreatePerson2('zyh',10)
+  alert(obj5.showName==obj6.showName)
+  </script>
+
+</head>
+<body>
+  
+</body>
+</html>

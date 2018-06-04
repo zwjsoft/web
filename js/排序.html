@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    window.onload=function(){
+
+        document.getElementById('btn1').onclick=function(){
+            let oUl=document.getElementById('ul1')
+            let aLi=oUl.getElementsByTagName('li')
+            let arr=[]
+            for(let i=0 ;i<aLi.length;i++){
+                arr[i]=aLi[i]
+            }
+            arr.sort(function(li1,li2){
+                let n1=parseFloat(li1.innerText)
+                let n2=parseFloat(li2.innerText)
+                return n1-n2
+            })
+            for(let i=0;i<arr.length;i++){
+                oUl.appendChild(arr[i])
+            }
+        }
+
+        document.getElementById('btn2').onclick=function(){
+            let aTr=document.getElementById('tb1').tBodies[0].rows
+            let arr=[]
+            for(let i=0 ;i<aTr.length;i++){
+                arr[i]=aTr[i]
+            }
+            arr.sort(function(row1,row2){
+                let n1=parseFloat(row1.cells[2].innerText)
+                let n2=parseFloat(row2.cells[2].innerText)
+                return n1-n2
+            })
+            for(let i=0;i<arr.length;i++){
+                document.getElementById('tb1').tBodies[0].appendChild(arr[i])
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <button id='btn1'>排序</button>
+    <ul id='ul1'>
+        <li>49</li>
+        <li>20</li>
+        <li>10</li>
+        <li>50</li>
+        <li>15</li>
+    </ul>
+
+    <button id='btn2'>排序</button>
+    <table id='tb1' border="1px" width='500px'>
+            <thead>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>zwj</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>zyh</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>zy</td>
+                    <td>16</td>
+                </tr>            
+            </tbody>
+        </table>
+</body>
+</html>

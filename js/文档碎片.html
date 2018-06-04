@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let oUl
+        let oH1
+        function liappend(){
+            let date1=new Date()
+            for(let i=0;i<100000;i++){
+                let oLi=document.createElement('li')
+                oUl.appendChild(oLi)
+            }
+            oH1.innerText=(new Date()).getTime()-date1.getTime()
+        }
+        function fragmentliappend(){
+            let date1=new Date()
+            let oFragMent=document.createDocumentFragment()
+            for(let i=0;i<100000;i++){
+                let oLi=document.createElement('li')
+                oFragMent.appendChild(oLi)
+            }
+            oUl.appendChild(oFragMent)
+            oH1.innerText=(new Date()).getTime()-date1.getTime()
+        }
+        window.onload=function(){
+            oUl=document.getElementById('ul1')
+            oH1=document.getElementsByTagName('h1')[0]
+            
+        }
+    </script>
+</head>
+<body>
+    <button onclick="liappend()">原始增加</button>
+    <button onclick="fragmentliappend()">碎片增加</button>
+    消耗时间：<h1></h1>
+    <ul id='ul1'>
+
+    </ul>
+</body>
+</html>

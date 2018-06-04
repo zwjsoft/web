@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<style>
+		.parent{
+			border:solid 1px red;
+			width:400px;
+			height:400px;
+			text-align:center;
+		}
+		.child{
+			border:solid 1px;
+			width:200px;
+			height:200px;
+			margin:100px
+		}
+		.grandson{
+			border:solid 1px gray;
+			width:100px;
+			height:100px;
+			margin:50px
+		}
+		
+	</style>
+	</head>
+
+	<body>
+		<div id="parent"  class="parent">
+		　　<div id="child" class="child">
+				<div id="grandson" class="grandson"></div>
+			</div>
+		</div>
+		<ul>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+            <li>item4</li>
+            <li>item5</li>
+            <li>item6</li>
+        </ul>
+	</body>
+</html>
+<script>
+	$("#parent").on("udEvent",function(e){
+		alert("parent事件被触发，"+this.id);
+	})
+	$("#child").on("udEvent",function(e){
+		alert("child事件被触发，"+this.id)
+	})
+	$("#grandson").on("udEvent",function(e){
+		alert("grandson事件被触发，"+this.id)
+	})
+　　$("ul").on("mouseover",function(e){
+		$(e.target).css("background-color","#ddd").siblings().css("background-color","white");
+	})
+	$('#parent').trigger('udEvent');
+	
+	
+	
+	var pubsub = (function(){
+    var q = {}
+        topics = {},
+        subUid = -1;
+    //发布消息
+    q.publish = function(topic, args) {
+        if(!topics[topic]) {return;}
+        var subs = topics[topic],
+            len = subs.length;
+        while(len--) {
+            subs[len].func(topic, args);
+        }
+        return this;
+    };
+    //订阅事件
+    q.subscribe = function(topic, func) {
+        topics[topic] = topics[topic] ? topics[topic] : [];
+        var token = (++subUid).toString();
+        topics[topic].push({
+            token : token,
+            func : func
+        });
+        return token;
+    };
+    return q;
+    //取消订阅就不写了，遍历topics，然后通过保存前面返回token，删除指定元素
+	})();
+	//触发的事件
+	var logmsg = function(topics, data) {
+		console.log("logging:" + topics + ":" + data);
+	}
+	//监听指定的消息'msgName'
+	var sub = pubsub.subscribe('msgName', logmsg);
+	var sub1 = pubsub.subscribe('msgName', logmsg);
+	//发布消息'msgName'
+	pubsub.publish('msgName', 'hello world');
+	pubsub.publish('msgName', 'hello world1');
+	//发布无人监听的消息'msgName1'
+	pubsub.publish('anotherMsgName', 'me too!');
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            oTxt=document.getElementById('txt1')
+            oTxt.onkeydown=function(ev){
+                console.log(ev.keyCode)
+                //8控制删除键
+                if(ev.keyCode!=8 && (ev.keyCode<48 || ev.keyCode>57)){
+                    return false
+                }
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <input id='txt1' type='text'>
+</body>
+</html>

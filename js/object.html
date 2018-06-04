@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let j1={a:1}
+        let j2={b:2}
+        let j3={c:3,d:4}
+        let j=Object.assign({},j1,j2,j3)
+        console.log(j)
+
+
+        let json={
+            name:'zwj',
+            age:18,
+            sex:'male'
+        }
+        console.log(Object.keys(json),Object.values(json),Object.entries(json))
+        for(key in Object.keys(json)){
+            console.log(Object.keys(json)[key])
+        }
+        for([key,value] of Object.entries(json)){
+            console.log(key,value)
+        }
+    </script>
+    
+</head>
+<body>
+    
+</body>
+</html>

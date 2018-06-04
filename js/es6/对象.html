@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象</title>
+    <script>
+        //json简写
+        let a=10;
+        let b=20;
+        let json={
+            a,
+            b,
+            showA(){
+                console.log(this.a);
+            },
+            showB:()=>{
+                console.log(this.b);
+            }
+        }
+        json.showA();
+        json.showB();
+
+        console.log(Object.is(+0,-0));
+        console.log(Object.is(NaN,NaN));
+
+
+        let json1={a:1};
+        let json2={b:2};
+        let json3={c:3};
+        let json4={};
+        let obj=Object.assign(json4,json1,json2,json3);
+        console.log(obj);
+        console.log(json4);
+        console.log(obj===json4);
+        //复制对象
+        let arr=[1,2,3,4];
+        let arr1=Object.assign([],arr);
+        console.log(arr1);
+
+        for(let v of Object.keys(obj)){
+            console.log(v);
+        }
+        for(let v of Object.keys(obj)){
+            console.log(v);
+            console.log(obj[v]);
+        }
+        for(let v of Object.values(obj)){
+            console.log(v);
+        }
+        for(let [key,value] of Object.entries(obj)){
+            console.log(key,value);
+        }
+        console.log(Object);
+
+        let {x,y,...z}={x:1,y:2,z:3,v:4};
+        console.log(x,y,z);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

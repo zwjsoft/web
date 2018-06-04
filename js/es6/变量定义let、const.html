@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变量定义let、const</title>
+    <script>
+        let a=12;
+        //let a=5;//报错，重复定义
+        let c=5;
+        console.log(c);
+        {
+            c=10;
+            console.log(c);//找上一级作用域
+        }
+        let d=10;
+        var e=10;
+        {
+            //c=10;//报错，没有预解析
+            console.log(e);//10，不是undefine，这里不是函数
+            e=5;
+            console.log(e);//5
+            var e=10;
+            console.log(e);//10
+            let c=5;
+        }
+    let arr=[];
+    for(let i=0;i<10;i++){
+        arr[i]={};
+        arr[i].show=function(){
+            console.log(i);
+        }
+    }
+    arr[0].show();//0
+    arr[5].show();//5
+
+    for(let i=0;i<10;i++){
+        let i=5;//这里的i已经是局部变量了，未影响for中的父级作用域
+        console.log(i);
+    }
+
+    const arr1=['1','2'];
+    arr1[0]='3';//成功，对象引用特点
+    arr1.push('3');
+    console.log(arr1);
+    //arr1=['3','2'];//失败了，常量不允许重新赋值
+
+    const arr2=Object.freeze(['1','2']);
+    console.log(arr2);
+    arr2[0]='3';//未报错，但为修改
+    console.log(arr2);
+    arr2.push('3');//报错
+
+    let top=10;//报错，window已定义
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

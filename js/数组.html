@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+        let lis=document.querySelectorAll('ur li')
+        let arrli=[...lis]
+        let arrli1=Array.from(lis)
+        console.log(arrli)
+        console.log(arrli1)
+
+        let json={
+            0:'zwj',
+            1:'18',
+            2:'男',
+            length:3
+        }
+        let arr1=Array.from(json)
+        console.log(json)
+        console.log(Array.from('1234578'))
+    }
+    </script>
+</head>
+<body>
+    <ur>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+    </ur>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<script>
+function Person(name, age) {
+   this.name = name;    //直接调用的话，this指向全局对象(this知识点整理)
+   this.age = age;      //使用new调用Peoson的话，this会指向原型为Person.prototype的空对象，通过this.name给空对象赋值，最后this作为return值
+   this.test=function(){
+		console.log("111111111111");
+   }
+}
+
+Person.prototype.hi = function() {   //通过Person.prototype.hi创建所有Person实例共享的方法,(可以参考上节的左图:对象的原型会指向构造器的prototype属性,所以想让obj1,obj2,obj3共享一些方法的话,只需在原型对象上一次性地添加属性和方法就可以了)；
+   console.log('Hi, my name is ' + this.name + ',I am ' + this.age + ' years old now.')//这里的this是全局对象
+};
+
+Person.prototype.LEGS_NUM = 2;   //再设置一些对Person类的所有实例共享的数据
+Person.prototype.ARMS_NUM = 2;
+Person.prototype.walk = function() {
+  console.log(this.name + ' is walking...');
+};
+
+function Student(name, age, className) {  //每个学生都属于人
+  Person.call(this, name, age);  //在Student这个子类里面先调用一下父类
+  this.className = className;
+}
+
+var s=new Student("zwj",18,'7(11)');
+console.log(Student.prototype);
+
+Student.prototype = Object.create(Person.prototype); 
+console.log(Student.prototype);
+var s1=new Student("zwj",18,'7(11)');
+console.log(s1.className);
+s1.hi();
+
+Student.prototype.constructor = Student;  //保持一致性，不设置的话constructor会指向Person
+Student.prototype.hi = function() {    //通过Student.prototype.hi这样子的赋值可以覆盖我们基类Person.prototype.hi
+  console.log('Hi, my name is ' + this.name + ',I am ' + this.age + ' years old now, and from ' + this.className + '.');
+}
+var s2=new Student("zwj",18,'7(11)');
+s2.hi();
+
+Student.prototype.learn = function(subject) {    //同时，我们又有自己的learn方法
+  console.log(this.name + 'is learning ' + subject + ' at' + this.className + '.');
+};
+s2.learn("aaaa");
+var s3=new Student("zwj",18,'7(11)');
+s3.learn("bbbb");
+</script>
+
+<body>
+
+<body>
+
+</html>

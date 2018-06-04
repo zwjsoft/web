@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height: 100px;
+            background:red;
+            position: absolute
+        }
+    </style>
+
+    <script>
+        document.onkeydown=function(ev){
+            var ev1=ev||event
+            var odiv=document.getElementById("div1")
+            //alert(ev.keyCode)
+            if(ev.keyCode==37){
+                odiv.style.left= odiv.offsetLeft -5+'px'
+            }
+            if(ev.keyCode==38){
+                odiv.style.top= odiv.offsetTop-5+'px'
+            }
+            if(ev.keyCode==39){
+                odiv.style.left=odiv.offsetLeft+5+'px'
+            }
+            if(ev.keyCode==40){
+                odiv.style.top=odiv.offsetTop+5+'px'
+            }
+        }
+    </script>
+</head>
+<body> 
+<div id="div1"></div>
+
+</body>
+</html>

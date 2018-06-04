@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组</title>
+    <script>
+        let arr=["apple","orange","tomato"];
+        arr.forEach((value,index,arr)=>{
+            console.log(this,value,index,arr);
+        },document)//这里用的箭头函数，无法改变this
+
+        arr.forEach(function(value,index,arr){
+            console.log(this,value,index,arr);
+        },document)//普通函数改变this
+
+        //arr.map,可以有数组返回值，如果没有返回值，和forEach类似
+        let arr1=arr.map((value,index,arr)=>{
+            console.log(value,index,arr);
+        })
+        console.log(arr1);//undefine undefine undefine 没有写返回，自动返回undefine
+        console.log(arr1);//undefine undefine undefine 没有写返回，自动返回undefine
+        let arr2=arr.map((value,index,arr)=>{
+            console.log(value,index,arr);
+            return value+"---"
+        })
+
+        console.log(arr1);//返回新数组["apple---", "orange---", "tomato---"]
+        
+        //根据条件决定是否保留
+        let arr3=arr.filter((value,index,arr)=>{
+            return value.length==5;
+        })
+        console.log(arr3)
+        //some,类似能够查找
+        let b=arr.some((value)=>{
+            return value=="orange"
+        })
+        console.log(b)
+        //判断元素是否全部满足
+        let b1=arr.every((value)=>{
+            return value.length>=6
+        })
+        console.log(b1)
+
+
+        //累进
+        let numarr=[1,2,3,4,5,6,7,8,9,10];
+        let res=numarr.reduceRight((pre,cur,index,arr)=>{
+            console.log(pre);
+            return pre+cur;
+        })
+        console.log(res)
+
+
+        for(let v of arr){
+            console.log(v);
+        }
+        for(let v of arr.keys()){
+            console.log(v);
+        }
+        for(let [key,value] of arr.entries()){
+            console.log(key,value);
+        }
+        for(let v in arr){
+            console.log(v);
+            console.log(arr[v]);
+        }
+
+        let json={
+            a1:"apple",
+            a2:"orange",
+            a3:"tomato"
+        }
+        for(let v in json){
+            console.log(v);
+            console.log(json[v])
+        }
+        for(let v in json){
+            console.log(v);
+        }
+/*         for(let v in arr.values()){
+            console.log(v);
+        } */
+
+        let json1={
+            0:"000",
+            1:"111",
+            2:"222"
+        }
+        console.log(Array.from(json1))//无lenght，空数组
+        let json2={
+            0:"000",
+            1:"111",
+            2:"222",
+            length:4
+        }
+        console.log(Array.from(json2))//有lenght，数组
+
+        console.log(Array.of(1,2,3));//一组值转成数组
+
+        let str="123";
+        let arr4=[...str];
+        console.log(arr4);
+        window.onload=function(){
+            let aLi=document.querySelectorAll('li');
+            let arr=[...aLi]//转类数组转数组
+            let arr1=Array.from(aLi)//转类数组转数组
+            let arr2=[].slice.call(aLi)//es5之前方法
+            console.log(arr);
+            console.log(arr1);
+            console.log(arr2);
+        }
+    </script>
+</head>
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    function getStyle(obj,attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr]
+        }else{
+            return getComputedStyle(obj,false)[attr]
+        }
+    }
+        function startMove(obj,attr, iTarget) {
+            clearInterval(obj.timer)
+            obj.timer = setInterval(function () {
+                var speed = (iTarget - parseInt(getStyle(obj,attr))) / 10
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+                if (iTarget ==  parseInt(getStyle(obj,attr))) {
+                    clearInterval(obj.timer)
+                }
+                else {
+                    obj.style[attr] =  parseInt(getStyle(obj,attr)) + speed + 'px'
+                }
+            }, 30)
+        }
+    window.onload=function(){
+        oDiv1=document.getElementById('div1')
+        oDiv2=document.getElementById('div2')
+        oDiv3=document.getElementById('div3')
+        oDiv1.onmouseover=function(){
+            startMove(this,'width',400)
+        }
+        oDiv1.onmouseout=function(){
+            startMove(this,'width',100)
+        }
+        oDiv2.onmouseover=function(){
+            startMove(this,'height',400)
+        }
+        oDiv2.onmouseout=function(){
+            startMove(this,'height',100)
+        }
+        oDiv3.onmouseover=function(){
+            startMove(this,'fontSize',50)
+        }
+        oDiv3.onmouseout=function(){
+            startMove(this,'fontSize',12)
+        }
+    }
+</script>
+<style>
+    div{
+        width:100px;
+        height: 100px;
+        background: red;
+        border: 5px solid;
+        margin: 20px;
+        float: left;
+        font-size: 12px
+    }
+</style>
+<body>
+    <div id='div1'>变高</div>
+    <div id='div2'>变宽</div>
+    <div id='div3'>字体变大小</div>
+</body>
+</html>

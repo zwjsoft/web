@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    function show(){
+        var n=1
+        var f1=function(){
+            n++
+            return n
+        }
+        return f1
+    }
+    var a=show()
+    console.log(a())
+    console.log(a())
+
+    +function fn(){
+        var lives=10
+        console.log(++lives)
+    }.call()
+
+    function show1(){
+        var n=1
+        return function f1(){
+            console.log(n)
+            return ++n
+        }
+
+    }
+
+    setInterval(show1(),1000)
+
+    window.onload=function(){
+        var aLi=document.getElementsByTagName('li')
+        for(var i=0;i<aLi.length;i++){
+            +function(ii){
+            aLi[ii].onclick=function(){
+                alert(ii)
+            }}(i)
+        }
+
+    }
+    </script>
+
+
+</head>
+<body>
+    <ul>
+        <li>0000</li>
+        <li>1111</li>
+        <li>2222</li>
+        <li>3333</li>
+    </ul>
+</body>
+</html>

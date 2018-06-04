@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0
+        }
+        li{
+            list-style: none;
+        }
+        #div1{
+            position: absolute;
+            height: 300px;
+            overflow: hidden;
+        }
+        #div1 ul{
+            position: relative
+
+        }
+        ul li{
+            height: 300px;
+        }
+        #div1 ol{
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        ol li{
+            float: left;
+            width:20px;
+            height: 20px;
+            background: red;
+            margin: 5px;
+            text-align: center
+        }
+        .active{
+            background: yellow
+        }
+        img{
+            height: 300px;
+        }
+    </style>
+    <script src='move1.js'></script>
+    <script>
+        window.onload=function(){
+            oUl=document.getElementById("ul1")
+            oOl=document.getElementById("ol1")
+            aLi=oOl.getElementsByTagName("li")
+            var now=0
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].index=i
+                aLi[i].onclick=function(){
+                    now=this.index
+                    tab()
+                }
+            }
+
+            function tab(){
+                for(var m=0;m<aLi.length;m++){
+                        aLi[m].className=''
+                    }
+                    aLi[now].className='active'
+                startMove(oUl,{'top':-now*300})
+            }
+        
+            
+            setInterval(function(){
+                now++
+                if(now==aLi.length) now=0
+                tab()
+            },1000)
+        }
+        
+    </script>
+</head>
+<body>
+<div id="div1">
+    <ul id="ul1">
+        <li><img src='images/1.jpg'/></li>
+        <li><img src='images/2.jpg'/></li>
+        <li><img src='images/3.jpg'/></li>
+        <li><img src='images/4.jpg'/></li>
+    </ul>
+    <ol id="ol1">
+            <li class='active'>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+    </ol>
+</div>
+</body>
+</html>

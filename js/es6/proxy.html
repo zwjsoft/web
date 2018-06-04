@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Proxy</title>
+    <script>
+        let obj={
+            name:"zwj"
+        }
+        let newObj=new Proxy(obj,{
+            get(target,property){
+                if(property in target){
+                    return target[property];
+                }else
+                {
+                //throw new Error(`${property}:当前属性不存在！`);
+                console.warn(`${property}:当前属性不存在！`);
+                }
+            },
+            set(target,prop,value){
+                if(prop=='age'){
+                    if(Number.isInteger(value)){
+                        throw new Error("age必须为整数！");
+                    }
+                    if(value>200){
+                        throw new Error("age必须小于200！");
+                    }
+                }else{
+                    target[prop]=value;
+                }
+            }
+        });
+        console.log(newObj.name);
+        console.log(newObj.age);
+        newObj.age=100.50;
+        console.log(newObj)
+        function sum(a,b){
+            return a+b;
+        }
+        let newSum=new Proxy(sum,{
+            apply(target,context,args){
+                return Reflect.apply(...arguments)
+            }
+        })
+        console.log(newSum(3,2));
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

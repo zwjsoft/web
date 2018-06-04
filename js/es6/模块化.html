@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模块化</title>
+    
+    <script type="module">
+    //模块化必须在服务器环境下才能运行
+        import {mm} from  "./1.js";
+        //import "http://code.jquery.com/jquery-3.3.1.min.js"
+        //console.log($('body'))
+        //console.log(mm.a,mm.b,mm.show(10,5))
+        //动态引入
+        import("./1.js").then((res)=>{
+            console.log(res.mm);
+        })
+
+        //import()就是一个promise对象
+        Promise.all([
+            import("./1.js"),
+            import("./2.js")
+        ]).then((res)=>{
+            console.log(res)
+        })
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
