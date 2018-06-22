@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    var num=Number("123")
+    console.log(typeof(num)+":"+num)
+    var num1=Number(undefined)
+    console.log(typeof(num1)+":"+num1)
+    var num2=Number("a")
+    console.log(typeof(num2)+":"+num2)
+    var num3=Number(true)
+    console.log(typeof(num3)+":"+num3)
+    console.log("--------parseInt-------------")
+    var num4=parseInt("123")
+    console.log(typeof(num4)+":"+num4)
+    var num5=parseInt(true)
+    console.log(typeof(num5)+":"+num5)
+    var num6=parseInt(123.9)
+    console.log(typeof(num6)+":"+num6)  
+    var num7=parseInt("123.9aaaa")
+    console.log(typeof(num7)+":"+num7)    
+    console.log("--------string-------------")
+    var s1=String("123.9")
+    console.log(typeof(s1)+":"+s1)
+    var s2=String(undefined)
+    console.log(typeof(s2)+":"+s2)
+    var s3=String(NaN)
+    console.log(typeof(s3)+":"+s3)
+    var s4=String(null)
+    console.log(typeof(s4)+":"+s4)
+    var s5=String(true)
+    console.log(typeof(s5)+":"+s5)
+    var s6=String(0.00)
+    console.log(typeof(s6)+":"+s6)
+    console.log("--------Boolean-------------")
+    var b1=Boolean(undefined)
+    console.log(typeof(b1)+":"+b1)
+    var b2=Boolean(null)
+    console.log(typeof(b2)+":"+b2)
+    var b3=Boolean(NaN)
+    console.log(typeof(b3)+":"+b3)
+
+    console.log("--------toString-------------")
+    // var t1=undefined.toString()
+    // console.log(typeof(t1)+":"+t1)
+    // var t2=null.toString()
+    // console.log(typeof(t2)+":"+t2)
+
+    console.log("--------数字进制-------------")
+    var n=10000
+    var n1=parseInt(n,2) //将2进制数字n转为10进制
+    console.log("n1:"+n1);
+    var n2=n1.toString(16)//将10进制n1转为16进制
+    console.log("n2:"+n2);
+
+    console.log(typeof(a))   //字符串"undefined",不报错
+    console.log(typeof(typeof(a)) )    //string
+    console.log(typeof(typeof(undefined)) )  //string
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

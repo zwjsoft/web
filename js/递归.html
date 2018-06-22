@@ -6,7 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        console.log(1+1+'a')
+        function mul(n){
+            if(n==1){
+                return 1
+            }
+            return n*mul(n-1)
+        }
+        
+        console.log(mul(5))
+
     </script>
 </head>
 <body>
