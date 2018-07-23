@@ -9,11 +9,11 @@
     <script>
 
         //预编译发生在函数执行前
-        //1. 创建AO对象，执行上下文，函数执行空间存储库
-        //2.把形参和变量申明，将作为AO的属性名，值undefine
+        //1.创建AO对象，执行上下文，函数执行空间存储库
+        //2.把形参和变量声明，将作为AO的属性名，值undefine
         //3.把实参值和形参值统一，就是将上对应属性值替换为实参
-        //4.在函数体找函数申明，把函数申明名作为AO属性名，将函数定义作为值
-
+        //4.在函数体找函数声明，把函数声明名作为AO属性名，将函数定义作为值
+        //this->window   arguments
         //执行函数，执行过程中按照上述AO处理
 
         function test(a,b){
@@ -28,6 +28,7 @@
             console.log(b)
         }
         test(1)
+
 /*         function bar(){
             return foo
             foo=10
@@ -39,7 +40,6 @@
         console.log(bar()) */
 
 
-        console.log(bar())
         function bar(){           
             foo=10
             function foo(){
@@ -47,7 +47,9 @@
             }
             var foo=11
             return foo
-        }
+        } 
+        console.log(bar())
+
     </script>
 
 </head>

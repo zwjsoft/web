@@ -6,19 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-    function test(){
-        this.print=function(){
-            console.log(this);
-            (function(){
-                console.log(this);
-            })()
+        //1.函数预编译过程中，this->window
+        //2.全局作用域中，this->window
+        //3.call/apply可以改变函数运行是this指向
+        //4.obj.func()中的this执行obj
+
+
+        var name='222'
+        var a={
+            name:"111",
+            say:function(){
+                console.log(this.name)
+            }
         }
-        
-    }
-    var t=new test()
-    t.print();
-
-
+        var fun=a.say
+        fun()
+        a.say()
+        var b={
+            name:"333",
+            say:function(fn){
+                fn()
+            }
+        }
+        b.say(a.say)
+        b.say=a.say
+        b.say()
     </script>
 </head>
 <body>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // (function(a,b){
+        //     console.log(a+b)
+        // })(1,2)
+
+        // (function(a,b){
+        //     console.log(a+b)
+        // }(1,2))
+
+        (function fn(a,b){
+            console.log(a+b)
+        })(1,2)
+        
+        function test(a,b){
+            console.log(a+b)
+        }(1,2)  //表达式才能执行，本函数没被括号包围，造成后面的(1,2)不是参数，而是一句独立无意义的表达
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

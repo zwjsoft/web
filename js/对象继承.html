@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //原型链方法
+        // Person.prototype.animale="人类"
+        // function Person(name,age){
+        //     this.name=name
+        //     this.age=age
+        // }        
+        // Student.prototype=new Person()
+        // function Student(){
+
+        // }
+        // var student=new Student()
+
+        //call方法
+        // function Person(name,age){
+        //     this.name=name
+        //     this.age=age
+        // }
+        // function Student(name,age,grade){
+        //     //Person.call(this,name,age)
+        //     Person.apply(this,[name,age])
+        //     this.grade=grade
+        // }
+
+        // var student=new Student('zwj',40,'初二')
+        //共享原型
+        Person.prototype.name="zwj"
+        Person.prototype.age=10
+        function Person(){
+             
+         }
+         
+         function Student(grade){
+             this.grade=grade
+         }
+         ///Student.prototype=Person.prototype
+         //var student=new Student('初二')
+
+         var inherit=(function(){
+            function F(){}
+            return function(target,orgin){
+            F.prototype=orgin.prototype
+            target.prototype=new F()
+            target.prototype.constructor=target
+            }
+             
+         }())
+         inherit(Student,Person)
+         var student=new Student('初二')
+         var person=new Person()
+         
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

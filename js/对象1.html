@@ -6,25 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        function CreatePerson(name,qq){
-            //var obj=new Object();
-            //console.log(this)
-            this.name=name;
-            this.qq=qq;
-            //return obj
-            console.log(this)
-        }
-        CreatePerson.prototype.showName=function(){
-                alert(this.name);
+
+        //字面量/对象直接量
+        var obj={
+            name:"zwj",
+            age:40,
+            run:function(){
+                this.name + "is running!"
             }
-        CreatePerson.prototype.showQQ=function(){
-                alert(this.qq);
-            }  
-    var obj=new CreatePerson('zyh','123');         
-    var obj1=new CreatePerson('zwj','456');  
-    obj.showName();
-    obj1.showName();
-    console.log(obj.showName===obj1.showName);
+        }
+        //delete obj.age //删除属性
+
+        //构造函数，大驼峰
+        function Person(name){
+            //this={}
+            this.name=name;
+            this.age=0;
+            this.grow=function(){
+                this.age++
+            }
+            //return this
+        }
+        var person=new Person('zwj')
+        person.grow()
+        var person1= Person('zy')
+        
+
     </script>
 </head>
 <body>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var obj={
+            name:'zwj',
+            age:20,
+            sex:'male',
+            __proto__:{
+                lastName:'wj',
+                firstName:'z',
+                __proto__:{
+                    abc:'abc',
+                    __proto__:Object
+                }
+            }
+        }      
+        Object.prototype.xxx='xxx'  //手工设置的属性会显示，系统自带的不会显示
+        for(var key in obj){
+            //if(obj.hasOwnProperty(key)){
+            console.log(`${key}:${obj[key]}`)
+        //}
+        }
+
+
+
+        function Person(){
+
+        }
+        var person=new Person()
+        //A instanceof B  A的原型链上有没有B的原型函数
+        console.log(person instanceof Object) //true
+
+
+        //判断对象类型
+        var arr={}  //var arr=[]
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

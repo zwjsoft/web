@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function Father(lastName){
+            this.lastName=lastName
+        }
+
+        function Son(lastName,name){
+            Father.call(this,lastName)
+            this.name=name
+        }
+
+        var son=new Son('zhang','wenjian')
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

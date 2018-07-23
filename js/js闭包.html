@@ -3,76 +3,18 @@
 <head>
 </head>
 <script>
-function outer() {   
-  var localVal = 30;    
-  return function(){      
-    return localVal++;    
-  } 
-} 
-var func = outer();  
-console.log(func()); // 30
-console.log(func()); // 31
 
+  var name='abc'
 
-(function() {   
-   var _userId = 23492;   
-   var _typeId = 'item';    
-   var export1 = {}; 
+  function fn(){
+    var name='123'
+    function printname(){
+      console.log(name)
+    }
+    return printname
+  }
+fn()()
 
-   function converter(userId) {          
-     return +userId; 
-   } 
-    export1.getUserId = function() {         
-       return converter(_userId);     
-   } 
-   export1.getTypeId = function() {          
-      return _typeId; 
-   }         
-   window.export1 = export1;   //通过此方式输出
-}());
-
- console.log(export1.getUserId()); // 23492 
- export1.getTypeId();  // item 
- export1._userId;    // undefined  
- export1._typeId;    // undefined       
- export1.converter; // undefined
- 
- var n=100;
- function f1(){
-　　　　var n=999;
-　　　　nAdd=function(){n+=1}
-　　　　function f2(){
-　　　　　　alert(n);
-　　　　}
-　　　　return f2;
-　　}
-　　var result=f1();
-　　result(); // 999
-　　nAdd();
-　　result(); // 1000
- 
-	var name= "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　return function(){
-　　　　　　　　return this.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object.getNameFunc()());
-
-	var name1 = "The Window";
-　　var object1 = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　var that = this;
-　　　　　　return function(){
-　　　　　　　　return that.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object1.getNameFunc()());
 </script>
 
 <body>

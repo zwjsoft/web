@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        Father.prototype.lastName="zhang"
+        function Father(){
+
+        }
+        
+        function Son(name){
+            this.name=name
+        }
+
+        function inherit(Target,Orgin){
+            Target.prototype=Orgin.prototype
+        }
+
+        inherit(Son,Father)
+
+        var son=new Son('wenjian')
+
+        Son.prototype.age=20
+
+        //共享原型后，Son修改造成Father原型变化
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

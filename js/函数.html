@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        console.log(fn)
+        console.log(a)
+        var a=10
+        function fn(){
+
+        }
+        console.log(fn.name)
+
+        var fn1=function abc(){
+
+        }
+        console.log(fn1.name)
+
+        var fn2=function(){
+
+        }
+        console.log(fn2.name)
+
+        function sum(a,b){
+            console.log(sum.length)
+            arguments[0]=10
+            console.log(arguments)
+            console.log(typeof(arguments))
+            console.log(arguments[3])
+        }
+        sum(1,2,3)
+
+        function sum1(a=10,b){
+            console.log(a)
+            function a(){
+
+            }
+            console.log(a)
+        }
+        sum1(1)
+
+        var f=(
+            function f(){
+                return "1"
+            },
+            function g(){
+                return 2
+            }
+        )()
+        console.log(typeof(f))
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

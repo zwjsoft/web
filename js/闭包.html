@@ -7,44 +7,96 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-    function show(){
-        var n=1
-        var f1=function(){
-            n++
-            return n
-        }
-        return f1
-    }
-    var a=show()
-    console.log(a())
-    console.log(a())
-
-    +function fn(){
-        var lives=10
-        console.log(++lives)
-    }.call()
-
-    function show1(){
-        var n=1
-        return function f1(){
-            console.log(n)
-            return ++n
+        function count(){
+            var count=0
+            function add(){
+                count++
+                console.log(count)
+            }
+            return add
         }
 
-    }
+        var counter1=count()
+        counter1()
+        counter1()
+        counter1()
+        var counter2=count()//count执行，和上一个执行的上下文中AO（count）不一样
+        counter2()
+        counter2()
+        counter2()
 
-    setInterval(show1(),1000)
 
-    window.onload=function(){
-        var aLi=document.getElementsByTagName('li')
-        for(var i=0;i<aLi.length;i++){
-            +function(ii){
-            aLi[ii].onclick=function(){
-                alert(ii)
-            }}(i)
+        function operation(){
+            var num=0
+            function add(){
+                num++
+                console.log(num)
+            }
+            function subtract(){
+                num--
+                console.log(num)
+            }
+            return {add,subtract}
         }
 
-    }
+        var operate=operation()//两个函数保留了同一个上级AO
+        operate.add()
+        operate.subtract()
+
+        var f;
+        function fn(){
+            var demo=100
+            function test(){
+                console.log(demo++)
+            }
+            f=test
+        }
+        fn()
+        f()
+        f()
+        
+        function aa(){
+            var aaa=100
+            function bb(){
+                var bbb=200
+                function cc(){
+                    console.log(aaa++,bbb++)
+                }
+                return cc
+            }
+            return bb
+        }
+        var baa=aa()()
+        baa()        
+        baa()   
+        baa()
+
+
+
+        function test(){
+            var arr=[]
+            for(var i=0;i<10;i++){
+                (function(j){
+                    arr[j]=function(){
+                        console.log(j)
+                    }
+                }(i))
+            }
+            return arr
+        }
+        var myarr=test()
+        for(var i=0;i<10;i++){
+            myarr[i]()
+        }
+
+        //只有表达式才能被执行
+        var aa=function(){
+            console.log('a')
+        }()
+        //只有表达式才能被执行
+        +function test(){
+            console.log('x')
+        }()
     </script>
 
 
