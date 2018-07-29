@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    /*方案一*/
+/*     a{
+        background-image: url(1.jpg);
+        display: inline-block;
+        width:200px;
+        height: 200px;
+        background-size: 200px 200px;
+        text-indent: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+    } */
+    /*方案一*/
+    a{
+        background-image: url(1.jpg);
+        display: inline-block;
+        width:200px;
+        height: 0px;
+        background-size: 200px 200px;
+        padding-top: 200px;
+        overflow: hidden;
+    }
+
+</style>
+<body>
+    <a href="www.taobao.com" target='_blank'>
+        淘宝网
+    </a>
+</body>
+</html>

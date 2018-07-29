@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .wrapper{
+        /* position: absolute; */
+        /* float: left; *//*这两个属性设置后，系统内部会自动设置inline-block*/
+        width:330px;
+        /* height: 330px; */
+        border:1px solid red
+    }
+    .content{
+        float: left;
+        width:100px;
+        height: 100px;
+        background: black;
+        color: white;
+        margin-left:10px;
+        margin-top:10px;
+        text-align: center;
+        line-height: 100px
+    }
+    p{
+        border:0px solid green;
+        clear:both; /*清除浮动流*/
+    }
+/*     .wrapper::after{
+        content:"";
+        clear:both;
+        display: block  /*只有块级元素才能清除浮动流*/
+    } */
+    .demo1{
+        float:left;
+        width: 100px;
+        height: 100px;
+        background: black;
+        opacity: 0.5;
+    }
+
+    .demo2{
+        /* display: inline; */
+        /* position: absolute; */
+        width: 200px;
+        height: 200px;
+        background: orange
+    }
+    </style>
+</head>
+<body>
+    <pre>
+        浮动流：
+        1. 所有产生了浮动流的元素，块级元素看不到他们；
+        2.产生了bfc的元素和文本类属性（inline）元素以及文本能看到浮动元素；
+    </pre>
+
+    <div class="demo1"></div>1111
+    <div class="demo2"></div>
+
+    <div class="wrapper">
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+        <div class="content">6</div>
+        <div class="content">7</div>
+        <div class="content">8</div>
+        <div class="content">9</div>
+        <!-- <p></p> -->
+    </div>
+
+
+    <div style="position: relative;">
+        <img src="1.jpg" alt="" style="position: absolute;float:left;width:200px">
+        CNKI英语在线翻译系统,为您提供学科领域最全面、最专业的专业词汇翻译,文献翻译、英汉互译、英汉词典、汉英辞典字典、英汉例句、专业词汇、科技术语翻译等免费翻译服务,...
+
+    </div>
+</body>
+</html>

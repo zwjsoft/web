@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .border{
+            width: 0px;
+            height:0px;
+            border:50px solid transparent;
+            border-left-color: red
+        }
+        .txt{
+            width:400px;
+            height: 100px;
+            border: 1px solid;
+            text-align:left;/*对齐方式*/
+            line-height: 100px;/*单行文本高度 文本高度=容器高度*/
+            text-indent: 2em;/*1em=font-size*/
+            text-decoration: line-through
+        }
+        img{
+            width:200px;
+            height: 200px;
+            border:1px solid;
+            /*margin-left: -6px */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="border"></div>
+    <div class="txt">
+        单行文本水平垂直居中
+    </div>
+    <div>
+        display显示属性
+        <p>
+            行级元素 inline：
+            内容决定所占的位置；
+            不能通过css设置宽高；
+            span a strong em
+        </p>
+        <p>
+            块级元素 block：
+            独占一行；
+            可以通过css改变宽高；
+            div p ul li ol form
+        </p>
+        <p>
+            行级块元素 inline-block：
+            内容决定所占的位置；
+            可以通过css改变宽高；
+            img
+        </p>
+        
+    </div>
+    <div>
+        <img src="1.jpg" alt=""><img src="1.jpg" alt=""><img src="1.jpg" alt=""><img src="1.jpg" alt="">
+    </div>
+    <div>
+            <img src="1.jpg" alt="">
+            <img src="1.jpg" alt="">
+            <img src="1.jpg" alt="">
+            <img src="1.jpg" alt="">
+            <br>
+            图之间有空格，有inline属性的都具有文字特性，img回车后造成有4px的分隔
+    </div>
+    
+</body>
+</html>

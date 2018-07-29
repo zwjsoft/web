@@ -1,0 +1,47 @@
+/* *{
+    background: red
+} */
+
+
+[id]{
+    background:black;
+}
+
+.active{
+    background: green
+}
+#div1{
+    background:yellow!important
+}
+/* 父子选择器（中间必须加空格），父子每个层级没必要一定是标签，也不需要是直接下级，只要是内部有就可行 */
+div span{
+    background: lightsalmon
+}
+div .test{
+    background: lightgreen
+}
+/* 直接子元素选择器，必须是直接上下级 */
+div>.test{
+    background:lightblue
+}
+
+/* 并列选择（同时满足），中间不加空格 */
+div.test{
+    background: orange
+}
+
+/* 分组选择器，共用代码块 */
+div,p,a{
+
+}
+/* 选择器可以重复，内部值并集，如果有相同则覆盖 */
+.aaa{
+    background: red
+}
+.aaa{
+    font-size: 5em
+}
+/*伪类选择器*/
+a:hover{
+    background: orange
+}
