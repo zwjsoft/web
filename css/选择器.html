@@ -5,60 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-
+    <style>
+        /*标签选择器*/
+        div{
+            color:red
+        }
+        /*class选择器*/
+        .divclass{
+            color:green
+        }
+        /*id选择器*/
+        #div1{
+            color:yellow
+        }
+        #div2{
+            color:orange
+        }
+        /*属性选择器*/
+        [name="abc"]{
+            color:orchid
+        }   
+        /*父子选择器*/   
+        div span{
+            color:blue
+        }    
+        /*直接子元素选择器*/   
+        #div3 > span{
+            color:brown
+        }    
+        /*并列选择器，注意并列中间无空格*/   
+        div.demo{
+            color:aqua
+        }   
+        /*分组选择器*/   
+        p,h3,.demo1
+        {
+            color:chartreuse
+        }   
+    </style>
 </head>
 <body>
-    <div id="div1" style="background: blue" class="active">测试
-        <span class='test'>
-            这是span
-        </span>
-    </div>
-    <div class="test">1111</div>
-    <div class="aaa">
-        aaa
-    </div>
-
-    <a href="">www.baidu.com</a>
+    <div>标签选择器效果</div>
+    <div>标签选择器效果</div>
+    <hr>
+    <div class="divclass">class选择器效果</div>
+    <div class="divclass">class选择器效果</div>
+    <hr>
+    <div id="div1">id选择器效果</div>
+    <div id="div2">id选择器效果</div>
+    <hr>
+    <div name="abc">属性选择器效果</div>
+    <div name="abc">属性选择器效果</div>
+    <hr>
     <div>
-        css的优先级按照权重比较（注意256进制）
-        <table>
-            <tr>
-                <td>选择器</td>
-                <td>权重</td>
-            </tr>
-            <tr>
-                <td>!import </td>
-                <td>infinity</td>
-            </tr>
-            <tr>
-                <td>行间样式</td>
-                <td>1000</td>
-            </tr>
-            <tr>
-                <td>id</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td>class|属性|伪类</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>标签选择器|伪元素</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>通配符*</td>
-                <td>0</td>
-            </tr>
-        </table>
-            
-            
-            
-            
-            
-            
+        <span>父子选择器</span>
+        <em>
+            <span>父子选择器</span>
+        </em>
     </div>
-    
+    <hr>
+    <div id="div3">
+        <span>直接选择器</span>
+        <em>
+            <span>直接选择器</span>
+        </em>
+    </div>
+    <hr>
+    <div class="demo">并列选择器</div> 
+    <hr>
+    <p>分组选择器</p>
+    <h3>分组选择器</h3>
+    <b class="demo1">分组选择器</b>
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+
+        function nameIterator(names){
+            let nextIndex=0
+            return {
+                next:function(){
+                    return nextIndex<names.length?{value:names[nextIndex++],done:false}:{value:undefined,done:true}
+                }
+            }
+        }
+        
+        let arr=['zwj','zyh','zy']
+        let name=nameIterator(arr)
+        console.log(name.next())
+        console.log(name.next())
+        console.log(name.next())
+        console.log(name.next())
+
+        function* names(){
+            yield 'zwj'
+            yield 'zyh'
+            yield 'zy'
+        }
+        const gen=names()
+        console.log(gen.next())
+        console.log(gen.next())
+        console.log(gen.next())
+        console.log(gen.next())
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
